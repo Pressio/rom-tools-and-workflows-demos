@@ -18,6 +18,9 @@
 # General configuration
 # ---------------------
 
+# Certificate verification
+tls_verify = False
+
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
@@ -25,8 +28,17 @@ extensions = [
   "sphinx.ext.viewcode",
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
-  "sphinx_design"
+  "sphinx_design",
+  "nbsphinx",
+  "jupyter_sphinx"
 ]
+
+# nb_custom_formats = {
+#     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+# }
+nbsphinx_custom_formats = {
+    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -99,21 +111,21 @@ pygments_dark_style = "monokai"
 # Options for HTML output
 # -----------------------
 
-html_theme = "furo"
+# html_theme = "furo"
 
-html_theme_options = {
-  "sidebar_hide_name": False,
-  "light_css_variables": {
-    "color-brand-primary": "#336790",  # blue
-    "color-brand-content": "#336790"
-  },
-  "dark_css_variables": {
-    #"color-brand-primary": "#E5B62F"  # yellow
-    #"color-brand-content": "#E5B62F",
-    "color-brand-primary": "#F39C12",  # orange
-    "color-brand-content": "#F39C12",
-  },
-}
+# html_theme_options = {
+#   "sidebar_hide_name": False,
+#   "light_css_variables": {
+#     "color-brand-primary": "#336790",  # blue
+#     "color-brand-content": "#336790"
+#   },
+#   "dark_css_variables": {
+#     #"color-brand-primary": "#E5B62F"  # yellow
+#     #"color-brand-content": "#E5B62F",
+#     "color-brand-primary": "#F39C12",  # orange
+#     "color-brand-content": "#F39C12",
+#   },
+# }
 
 
 html_sidebars = {}
@@ -200,3 +212,8 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_use_modindex = True
+
+import os
+
+package_path = os.path.abspath('../..')
+os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))

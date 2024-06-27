@@ -2,8 +2,7 @@ Run your first problem!
 =======================
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 3
 
-    demo-2d-diffusion
     endtoend_py
     endtoend_cpp

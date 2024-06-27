@@ -40,6 +40,9 @@ nbsphinx_custom_formats = {
     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
 }
 
+# Adjusting size of embedded HTMLs
+html_static_path = ['_static']
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
@@ -217,3 +220,6 @@ import os
 
 package_path = os.path.abspath('../..')
 os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
+
+def setup(app):
+    app.add_css_file('custom.css')

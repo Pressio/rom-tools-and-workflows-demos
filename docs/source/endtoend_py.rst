@@ -8,7 +8,7 @@ The full example file is located at `https://github.com/Pressio/rom-tools-and-wo
 Mesh Generation
 ***************
 
-The first step is setting up the problem. First, we generate the mesh.::
+The first step is setting up the problem. First, we generate the mesh. ::
 
     def generate_mesh(pressio_file_path, mesh_path, figure_path, n_x, n_y):
         import os
@@ -32,7 +32,7 @@ The first step is setting up the problem. First, we generate the mesh.::
 The mesh should look like this.
 
 
-Next, we define our full-order model and our reduced-order model objects.::
+Next, we define our full-order model and our reduced-order model objects. ::
 
     # Define FOM and ROM Model
     fom_model = FOM_Model()

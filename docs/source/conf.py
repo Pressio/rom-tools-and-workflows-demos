@@ -29,7 +29,7 @@ extensions = [
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
   "sphinx_design",
-  "nbsphinx",
+  "myst_nb",
   "jupyter_sphinx"
 ]
 

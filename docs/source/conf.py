@@ -26,6 +26,9 @@ extensions = [
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
   "sphinx_design"
+  "myst_nb",
+  "jupyter_sphinx",
+  "nbsphinx",
 ]
 
 # Add any paths that contain templates here, relative to this directory.

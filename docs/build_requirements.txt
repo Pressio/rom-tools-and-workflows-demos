@@ -7,3 +7,4 @@ sphinx-design
 myst-nb
 lxml_html_clean
 jupyter_sphinx
+ipynb

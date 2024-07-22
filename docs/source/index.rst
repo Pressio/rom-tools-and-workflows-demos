@@ -1,41 +1,45 @@
-Overview
+rom-tools-and-workflows tutorials
 ========
 
-This site provides a suite of tutorials on how to the rom-tools-and-workflows package. We provide tutorials for
+The ROM tools and workflows Python library comprises a set of algorithms for
+constructing and exploiting ROMs. The library is designed internally in terms of
+Protocols and abstract base classes that encapsulate all the information needed
+to run a given algorithm. The philosophy is that, for any given application, the
+user simply needs to create a class that meets the required API of the abstract base class. 
+Once this class is complete, the user gains access to all of our existing algorithms.
+
+
+
+This site provides a suite of tutorials and demos on how to the rom-tools-and-workflows package. We provide tutorials for
 
 * Basis construction
 * Parameter spaces
 * Workflows
 
 
-this is a subsection with this
-------------------------------
-
-No! This will **not** become a full solver. The scope is and will stay limited.
 
 .. Important::
     
-    Something important.... 
+    rom-tools-and-workflows is only responsible for the offline and workflow aspects of model reduction. It does not deal with the construction of ROMs. 
 
-
-Another subsection
-------------------
-
-dfdsfdfda
 
 
 .. toctree::
-    :maxdepth: 1
+    :maxdepth: 2
     :hidden:
 
     installation
+    documentation
 
 .. toctree::
-    :caption: Demos 
+    :caption: Tutorials 
     :maxdepth: 1
     :hidden:
 
-    basis_construction 
+    vector_space 
+    parameter_space 
+    models 
+    workflows 
 
 .. toctree::
     :caption: Miscellanea

@@ -390,27 +390,27 @@ v0.1.0</span>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks
 =======  Sample 0 ============
 Running
-Sample complete, run time = 0.1043543815612793
+Sample complete, run time = 0.10376644134521484
  
 =======  Sample 1 ============
 Running
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample complete, run time = 0.10504341125488281
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample complete, run time = 0.1026773452758789
  
 =======  Sample 2 ============
 Running
-Sample complete, run time = 0.10369706153869629
+Sample complete, run time = 0.10342144966125488
  
 =======  Sample 3 ============
 Running
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample complete, run time = 0.10368227958679199
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sample complete, run time = 0.10395097732543945
  
 =======  Sample 4 ============
 Running
-Sample complete, run time = 0.10335087776184082
+Sample complete, run time = 0.10310864448547363
  
 </pre></div>
 </div>
@@ -464,28 +464,10 @@ Sample complete, run time = 0.10335087776184082
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py&#39;: [Errno 2] No such file or directory
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROM-FOM error =  4.138311277399085e-05
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">10</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">myRomModel</span><span class="o">.</span><span class="n">populate_run_directory</span><span class="p">(</span><span class="n">run_directory</span><span class="p">,</span><span class="n">parameter_sample</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">myRomModel</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">run_directory</span><span class="p">,</span><span class="n">parameter_sample</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">rom_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">run_directory</span> <span class="o">+</span> <span class="s1">&#39;/solution.npz&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rom_solution</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">rom_solution</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;ROM&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">u_rom</span> <span class="o">=</span> <span class="n">rom_solution</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py:455,</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)</span>
-<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="g g-Whitespace">    </span><span class="mi">454</span> <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">455</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="c1"># Code to distinguish from NumPy binary files and pickles.</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/solution.npz&#39;
-</pre></div>
-</div>
+<img alt="../_images/5b09086b501d54b7839e9f527438ae0470af78753f3368c9b720d78dde745584.png" src="../_images/5b09086b501d54b7839e9f527438ae0470af78753f3368c9b720d78dde745584.png" />
 </div>
 </div>
 </section>

@@ -28,7 +28,39 @@ if __name__ == "__main__":
 ----- stdout -----
 Greedy iteration # 0
 ----- stderr -----
-python: can't open file '/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py': [Errno 2] No such file or directory
+/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/rom-tools-and-workflows/romtools/workflows/greedy/run_greedy.py:235: RuntimeWarning: invalid value encountered in scalar divide
+  qoi_error = np.linalg.norm(rom_qoi - fom_qoi) / np.linalg.norm(fom_qoi)
+----- stdout -----
+Greedy iteration # 1
+----- stdout -----
+Greedy iteration # 2
+----- stdout -----
+Greedy iteration # 3
+----- stdout -----
+Greedy iteration # 4
+----- stdout -----
+Greedy iteration # 5
+----- stdout -----
+Greedy iteration # 6
+----- stdout -----
+Greedy iteration # 7
+----- stdout -----
+Greedy iteration # 8
+----- stdout -----
+Greedy iteration # 9
+----- stdout -----
+Greedy iteration # 10
+----- stderr -----
+Traceback (most recent call last):
+  File "/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py", line 32, in <module>
+    u = adr_problem.solve(params[0],params[1])
+  File "/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py", line 22, in solve
+    solution = np.linalg.solve(self.A_r_,self.f_r_)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/linalg/_linalg.py", line 410, in solve
+    r = gufunc(a, b, signature=signature)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/linalg/_linalg.py", line 104, in _raise_linalgerror_singular
+    raise LinAlgError("Singular matrix")
+numpy.linalg.LinAlgError: Singular matrix
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
@@ -60,5 +92,5 @@ File [0;32m/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages
 [1;32m    456[0m     own_fid [38;5;241m=[39m [38;5;28;01mTrue[39;00m
 [1;32m    458[0m [38;5;66;03m# Code to distinguish from NumPy binary files and pickles.[39;00m
 
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/greedy_example//rom_iteration_0/run_2/solution.npz'
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/greedy_example//rom_iteration_10/run_18/solution.npz'
 

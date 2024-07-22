@@ -22,7 +22,7 @@ jobs:
         run: |
           pip install -r ./docs/build_requirements.txt
           git clone https://github.com/Pressio/rom-tools-and-workflows.git
-          pip install rom-tools-and-workflows
+          pip install -e rom-tools-and-workflows
       - name: Build documentation
         working-directory: ${{ env.docs-directory }}
         run: |

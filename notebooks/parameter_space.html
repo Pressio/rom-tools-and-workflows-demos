@@ -247,15 +247,7 @@ v0.1.0</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#First, let&#39;s import the relavant modules:</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">romtools</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">romtools.workflows</span> <span class="kn">import</span> <span class="n">ParameterSpace</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;romtools&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>module &#39;mpi4py&#39; is not installed
 </pre></div>
 </div>
 </div>
@@ -328,12 +320,12 @@ v0.1.0</span>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">24</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">24</span>
 <span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="k">return</span> <span class="n">samples</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1">#Python will throw an error when we try to instatiate</span>
 <span class="ne">---&gt; </span><span class="mi">24</span> <span class="n">myBadBasicParameterSpace</span> <span class="o">=</span> <span class="n">BadBasicParameterSpace</span><span class="p">()</span>
 
-<span class="ne">TypeError</span>: Can&#39;t instantiate abstract class BadBasicParameterSpace without an implementation for abstract method &#39;get_names&#39;
+<span class="ne">TypeError</span>: Can&#39;t instantiate abstract class BadBasicParameterSpace with abstract method get_names
 </pre></div>
 </div>
 </div>

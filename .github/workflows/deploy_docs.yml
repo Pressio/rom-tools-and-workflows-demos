@@ -21,6 +21,9 @@ jobs:
       - name: Install Python dependencies
         run: |
           pip3 install -r ./docs/build_requirements.txt
+          git clone https://github.com/Pressio/rom-tools-and-workflows.git
+          cd rom-tools-and-workflows
+          pip install .
       - name: Build documentation
         working-directory: ${{ env.docs-directory }}
         run: |

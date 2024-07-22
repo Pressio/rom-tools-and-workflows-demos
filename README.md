@@ -15,7 +15,7 @@ These steps outline how to build the documentation manually.
 
 ```sh
 git clone https://github.com/Pressio/rom-tools-and-workflows.git
-pip install rom-tools-and-workflows
+pip install -e rom-tools-and-workflows
 ```
 
 2. Then clone the `rom-tools-and-workflows-demos` repo and navigate to the `docs` directory

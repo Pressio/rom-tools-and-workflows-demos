@@ -286,16 +286,7 @@ v0.1.0</span>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#First, we will import the FOM model.</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1">#Here, we will just use the advection diffusion FOM we setup in the external model tutorial </span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">ipynb.fs.full.external_qoi_model</span> <span class="kn">import</span> <span class="n">adrExternalRomToolsQoiModel</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">myFom</span> <span class="o">=</span> <span class="n">adrExternalRomToolsQoiModel</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1"># Now, let&#39;s setup our parameter space. We will use the parameter space we constructed in the parameter_space</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipynb&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks
 </pre></div>
 </div>
 </div>
@@ -352,15 +343,41 @@ v0.1.0</span>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Greedy iteration # 0
-Greedy iteration # 1
-Greedy iteration # 2
-Greedy iteration # 3
-Greedy iteration # 4
-Greedy iteration # 5
-Greedy iteration # 6
-Greedy iteration # 7
-Greedy iteration # 8
-Run converged, max approximate qoi error = 4.3477021339064117e-07
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>python: can&#39;t open file &#39;/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py&#39;: [Errno 2] No such file or directory
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">tolerance</span> <span class="o">=</span> <span class="mf">1.e-6</span> <span class="c1">#tolerance on greedy algorithm</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">testing_sample_size</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1">#sample size on which to evaluate greedy ROM</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">romtools</span><span class="o">.</span><span class="n">workflows</span><span class="o">.</span><span class="n">greedy</span><span class="o">.</span><span class="n">run_greedy</span><span class="p">(</span><span class="n">myFom</span><span class="p">,</span><span class="n">myRomModelBuilder</span><span class="p">,</span><span class="n">myParameterSpace</span><span class="p">,</span><span class="n">greedy_work_dir</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 	<span class="n">tolerance</span><span class="p">,</span><span class="n">testing_sample_size</span><span class="p">)</span>
+
+<span class="nn">File ~/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/rom-tools-and-workflows/romtools/workflows/greedy/run_greedy.py:192,</span> in <span class="ni">run_greedy</span><span class="nt">(fom_model, rom_model_builder, parameter_space, absolute_greedy_work_directory, tolerance, testing_sample_size, random_seed)</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="n">rom_model</span><span class="o">.</span><span class="n">populate_run_directory</span><span class="p">(</span><span class="n">rom_run_directory</span><span class="p">,</span><span class="n">parameter_dict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>     <span class="n">rom_model</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">rom_run_directory</span><span class="p">,</span><span class="n">parameter_dict</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">192</span>     <span class="n">error_indicators</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span> <span class="o">=</span> <span class="n">rom_model</span><span class="o">.</span><span class="n">compute_error_estimate</span><span class="p">(</span><span class="n">rom_run_directory</span><span class="p">,</span><span class="n">parameter_dict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span> <span class="n">rom_time</span> <span class="o">+=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="g g-Whitespace">    </span><span class="mi">196</span> <span class="n">sample_with_highest_error_indicator</span> <span class="o">=</span> <span class="n">samples_left</span><span class="p">[</span><span class="n">la</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">error_indicators</span><span class="p">)]</span>
+
+<span class="nn">Cell In[3], line 23,</span> in <span class="ni">adrQoiRomWithErrorEstimate.compute_error_estimate</span><span class="nt">(self, run_directory, parameter_sample)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="k">def</span> <span class="nf">compute_error_estimate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parameter_sample</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="n">rom_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">offline_directory_</span> <span class="o">+</span> <span class="s1">&#39;/rom_data.npz&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">23</span>     <span class="n">solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">run_directory</span> <span class="o">+</span> <span class="s1">&#39;/solution.npz&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span>     <span class="n">u</span> <span class="o">=</span> <span class="n">solution</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span>     <span class="n">residual</span> <span class="o">=</span> <span class="p">(</span><span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">rom_data</span><span class="p">[</span><span class="s1">&#39;Ac&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">rom_data</span><span class="p">[</span><span class="s1">&#39;Ad&#39;</span><span class="p">])</span><span class="nd">@u</span> <span class="o">-</span> <span class="n">rom_data</span><span class="p">[</span><span class="s1">&#39;f&#39;</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py:455,</span> in <span class="ni">load</span><span class="nt">(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="g g-Whitespace">    </span><span class="mi">454</span> <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">455</span>     <span class="n">fid</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">enter_context</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>     <span class="n">own_fid</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">458</span> <span class="c1"># Code to distinguish from NumPy binary files and pickles.</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/greedy_example//rom_iteration_0/run_2/solution.npz&#39;
 </pre></div>
 </div>
 </div>

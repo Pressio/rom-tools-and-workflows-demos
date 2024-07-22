@@ -15,33 +15,51 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#Let's give this model builder a try.
-if __name__ == "__main__":
-    #First, let's create some training data following the basic_sampling tutorial
-    from ipynb.fs.full.external_model import adrExternalRomToolsModel
-    myModel = adrExternalRomToolsModel()
-    
-    from ipynb.fs.full.parameter_space import BasicParameterSpace
-    myParameterSpace = BasicParameterSpace()
-    
-    #The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.
-    work_directory = os.getcwd() + '/model_builder_tutorial/'
 
-    #Now we can run the sampling algorithm.
-    sample_directories = sampling.run_sampling(myModel,myParameterSpace,work_directory,number_of_samples=5)
+    # Let's test running our model and comparing it to the FOM!
+    parameter_sample = {}
+    parameter_sample['c'] = 0.5
+    parameter_sample['nu'] = 1e-1
+    run_directory = os.getcwd()
 
+    #Let's run the ROM
+    myRomModel.populate_run_directory(run_directory,parameter_sample)
+    myRomModel.run_model(run_directory,parameter_sample)
+    rom_solution = np.load(run_directory + '/solution.npz')
+    plt.plot(rom_solution['x'],rom_solution['u'],color='blue',label='ROM')
+    u_rom = rom_solution['u']
+
+    #Now let's run the FOM
+    myModel.populate_run_directory(run_directory,parameter_sample)
+    myModel.run_model(run_directory,parameter_sample)
+    fom_solution = np.load(run_directory + '/solution.npz')    
+    u_fom = fom_solution['u']
+
+    print('ROM-FOM error = ' , np.linalg.norm(u_rom - u_fom)/np.linalg.norm(u_fom))
+    plt.plot(fom_solution['x'],fom_solution['u'],color='green',label='FOM')
+    plt.show()
+    
 ------------------
 
+----- stderr -----
+python: can't open file '/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/adr_1d//adr_1d_rom.py': [Errno 2] No such file or directory
+------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[4], line 4[0m
-[1;32m      1[0m [38;5;66;03m#Let's give this model builder a try.[39;00m
-[1;32m      2[0m [38;5;28;01mif[39;00m [38;5;18m__name__[39m [38;5;241m==[39m [38;5;124m"[39m[38;5;124m__main__[39m[38;5;124m"[39m:
-[1;32m      3[0m     [38;5;66;03m#First, let's create some training data following the basic_sampling tutorial[39;00m
-[0;32m----> 4[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mipynb[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfull[39;00m[38;5;21;01m.[39;00m[38;5;21;01mexternal_model[39;00m [38;5;28;01mimport[39;00m adrExternalRomToolsModel
-[1;32m      5[0m     myModel [38;5;241m=[39m adrExternalRomToolsModel()
-[1;32m      7[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mipynb[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfull[39;00m[38;5;21;01m.[39;00m[38;5;21;01mparameter_space[39;00m [38;5;28;01mimport[39;00m BasicParameterSpace
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[6], line 10[0m
+[1;32m      8[0m myRomModel[38;5;241m.[39mpopulate_run_directory(run_directory,parameter_sample)
+[1;32m      9[0m myRomModel[38;5;241m.[39mrun_model(run_directory,parameter_sample)
+[0;32m---> 10[0m rom_solution [38;5;241m=[39m [43mnp[49m[38;5;241;43m.[39;49m[43mload[49m[43m([49m[43mrun_directory[49m[43m [49m[38;5;241;43m+[39;49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43m/solution.npz[39;49m[38;5;124;43m'[39;49m[43m)[49m
+[1;32m     11[0m plt[38;5;241m.[39mplot(rom_solution[[38;5;124m'[39m[38;5;124mx[39m[38;5;124m'[39m],rom_solution[[38;5;124m'[39m[38;5;124mu[39m[38;5;124m'[39m],color[38;5;241m=[39m[38;5;124m'[39m[38;5;124mblue[39m[38;5;124m'[39m,label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mROM[39m[38;5;124m'[39m)
+[1;32m     12[0m u_rom [38;5;241m=[39m rom_solution[[38;5;124m'[39m[38;5;124mu[39m[38;5;124m'[39m]
 
-[0;31mModuleNotFoundError[0m: No module named 'ipynb'
+File [0;32m/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py:455[0m, in [0;36mload[0;34m(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)[0m
+[1;32m    453[0m     own_fid [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    454[0m [38;5;28;01melse[39;00m:
+[0;32m--> 455[0m     fid [38;5;241m=[39m stack[38;5;241m.[39menter_context([38;5;28;43mopen[39;49m[43m([49m[43mos[49m[38;5;241;43m.[39;49m[43mfspath[49m[43m([49m[43mfile[49m[43m)[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m"[39;49m[43m)[49m)
+[1;32m    456[0m     own_fid [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m    458[0m [38;5;66;03m# Code to distinguish from NumPy binary files and pickles.[39;00m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/home/runner/work/rom-tools-and-workflows-demos/rom-tools-and-workflows-demos/docs/source/notebooks/solution.npz'
 

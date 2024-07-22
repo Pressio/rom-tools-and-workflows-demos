@@ -9,5 +9,6 @@ This set of tutorials will outline the basics of constructing a model
 
    notebooks/basic_model.ipynb
    notebooks/external_model.ipynb
+   notebooks/external_qoi_model.ipynb
 
 

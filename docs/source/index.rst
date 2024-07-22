@@ -32,14 +32,24 @@ This site provides a suite of tutorials and demos on how to the rom-tools-and-wo
     documentation
 
 .. toctree::
-    :caption: Tutorials 
+    :caption: Basic concept tutorials 
     :maxdepth: 1
     :hidden:
 
     vector_space 
     parameter_space 
+
+.. toctree::
+    :caption: Basic workflow tutorials 
+
     models 
     workflows 
+
+.. toctree::
+    :caption: ROM-FOM workflow tutorials 
+
+    model_builders 
+    greedy_training
 
 .. toctree::
     :caption: Miscellanea

@@ -172,8 +172,8 @@ v0.1.0</span>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Build/install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="current">
+<p class="caption" role="heading"><span class="caption-text">Basic concept tutorials</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../vector_space.html">vector_space</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="dictionary_vector_space.html">Dictionary vector space tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pod_vector_space.html">POD vector space tutorial</a></li>
@@ -185,13 +185,28 @@ v0.1.0</span>
 <li class="toctree-l2"><a class="reference internal" href="parameter_space.html">Basic parameter space tutorial</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic workflow tutorials</span></p>
+<ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../models.html">models</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Basic model tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_model.html">External model tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_qoi_model.html">External QoiModel tutorial</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../workflows.html">workflows</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_sampling.html">Basic sampling tutorial</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROM-FOM workflow tutorials</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_builders.html">model_builders</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_builder.html">Basic model builder tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../greedy_training.html">Greedy Training</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="greedy_training.html">Greedy training tutorial</a></li>
 </ul>
 </li>
 </ul>
@@ -261,18 +276,26 @@ v0.1.0</span>
 <span class="sd">&#39;&#39;&#39;</span>
 <span class="c1"># We will start with defining an advection diffusion problem. This class does NOT meet any interface related to romtools</span>
 <span class="k">class</span> <span class="nc">advectionDiffusionProblem</span><span class="p">:</span>
-
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">nx</span><span class="p">):</span>
         <span class="n">nx_</span> <span class="o">=</span> <span class="n">nx</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">nx</span><span class="p">)</span>
         <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">nx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1">## Assemble diffusion operator and assign boundary conditions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span><span class="n">nx</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+       
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
+       
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nx_</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">dx</span><span class="o">**</span><span class="mi">2</span>
-            
+        
         <span class="bp">self</span><span class="o">.</span><span class="n">Ac_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nx</span><span class="p">,</span><span class="n">nx</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ac_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">dx</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nx_</span> <span class="o">-</span><span class="mi">1</span> <span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ac_</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">dx</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">Ac_</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="n">dx</span>
@@ -281,10 +304,6 @@ v0.1.0</span>
 
     <span class="k">def</span> <span class="nf">assemble_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A_</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Ac_</span> <span class="o">-</span> <span class="n">nu</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">Ad_</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">A_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">A_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">f_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">f_</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
 
     <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assemble_system</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">)</span>
@@ -305,7 +324,7 @@ v0.1.0</span>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$u$&#39;)
 </pre></div>
 </div>
-<img alt="../_images/36fb8764ce27c4d0fd173e9837aef6e4839ac6c680b7a98c546a76a2ef5b48c5.png" src="../_images/36fb8764ce27c4d0fd173e9837aef6e4839ac6c680b7a98c546a76a2ef5b48c5.png" />
+<img alt="../_images/3c78fd93f5ffd9f896af2e4572c7af3496d393e63ba9883f6c425ed475ed3c67.png" src="../_images/3c78fd93f5ffd9f896af2e4572c7af3496d393e63ba9883f6c425ed475ed3c67.png" />
 </div>
 </div>
 <div class="cell docutils container">

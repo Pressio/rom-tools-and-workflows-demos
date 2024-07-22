@@ -1,0 +1,58 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+#Let's do an example run of the model similar to how it will be used in a workflow.
+
+#First, let's make a dictionary that is a stand in for the parameter space
+if __name__ == "__main__":
+    parameter_sample = {}
+    parameter_sample['c'] = 0.5
+    parameter_sample['nu'] = 1e-1
+    
+    #Now, let's populate our run directory. In this example, we will just use the current run directory.
+    #In a full workflow, romtools will manage creating directories
+    d
+
+    #Now, let's run the model
+    adr_for_romtools.run_model(os.getcwd(),parameter_sample)
+
+    #We can look at a solution
+    sol = np.load('solution.npz')
+    plt.plot(sol['x'],sol['u'])
+    plt.xlabel(r'$x$')
+    plt.ylabel(r'$u$')
+
+    #We will finish by cleaning up the files we created
+    os.system('rm params.dat')
+    os.system('rm solution.npz')
+
+    #That's it! See the sampling tutorial for an example of how this model is used in a sampling workflow
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[4], line 11[0m
+[1;32m      7[0m parameter_sample[[38;5;124m'[39m[38;5;124mnu[39m[38;5;124m'[39m] [38;5;241m=[39m [38;5;241m1e-1[39m
+[1;32m      9[0m [38;5;66;03m#Now, let's populate our run directory. In this example, we will just use the current run directory.[39;00m
+[1;32m     10[0m [38;5;66;03m#In a full workflow, romtools will manage creating directories[39;00m
+[0;32m---> 11[0m [43md[49m
+[1;32m     13[0m [38;5;66;03m#Now, let's run the model[39;00m
+[1;32m     14[0m adr_for_romtools[38;5;241m.[39mrun_model(os[38;5;241m.[39mgetcwd(),parameter_sample)
+
+[0;31mNameError[0m: name 'd' is not defined
+

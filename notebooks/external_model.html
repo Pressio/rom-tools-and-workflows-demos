@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="workflows" href="../workflows.html" /><link rel="prev" title="Basic model tutorial" href="basic_model.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="External QoiModel tutorial" href="external_qoi_model.html" /><link rel="prev" title="Basic model tutorial" href="basic_model.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
         <title>External model tutorial - rom-tools-and-workflows-demos v0.1.0</title>
@@ -172,8 +172,8 @@ v0.1.0</span>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Build/install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="current">
+<p class="caption" role="heading"><span class="caption-text">Basic concept tutorials</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../vector_space.html">vector_space</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="dictionary_vector_space.html">Dictionary vector space tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pod_vector_space.html">POD vector space tutorial</a></li>
@@ -185,13 +185,28 @@ v0.1.0</span>
 <li class="toctree-l2"><a class="reference internal" href="parameter_space.html">Basic parameter space tutorial</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic workflow tutorials</span></p>
+<ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../models.html">models</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="basic_model.html">Basic model tutorial</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">External model tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_qoi_model.html">External QoiModel tutorial</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../workflows.html">workflows</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_sampling.html">Basic sampling tutorial</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROM-FOM workflow tutorials</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_builders.html">model_builders</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_builder.html">Basic model builder tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../greedy_training.html">Greedy Training</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="greedy_training.html">Greedy training tutorial</a></li>
 </ul>
 </li>
 </ul>
@@ -270,31 +285,32 @@ v0.1.0</span>
 <span class="sd">&#39;&#39;&#39;</span>
 
 <span class="c1"># Here is an example of how we would run the code</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1">#First, let&#39;s create our parameters</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mf">1.</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="mf">1.e-2</span>
+    <span class="c1">#Now, we will save them to a file expected by the adr_1d.py code</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;params.dat&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">]))</span>
 
-<span class="c1">#First, let&#39;s create our parameters</span>
-<span class="n">c</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">nu</span> <span class="o">=</span> <span class="mf">1.e-2</span>
-<span class="c1">#Now, we will save them to a file expected by the adr_1d.py code</span>
-<span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s1">&#39;params.dat&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">]))</span>
+    <span class="c1">#This is how we would execute our external code</span>
+    <span class="c1">#(For a more sophisticated application, this is likely an mpi call to an executable or</span>
+    <span class="c1"># a submission to the HPCs)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;python adr_1d/adr_1d.py&#39;</span><span class="p">)</span>
 
-<span class="c1">#This is how we would execute our external code</span>
-<span class="c1">#(For a more sophisticated application, this is likely an mpi call to an executable or</span>
-<span class="c1"># a submission to the HPCs)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;python adr_1d/adr_1d.py&#39;</span><span class="p">)</span>
+    <span class="c1">#Let&#39;s take a peak at a solution</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;solution.npz&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u$&#39;</span><span class="p">)</span>
 
-<span class="c1">#Let&#39;s take a peak at a solution</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;solution.npz&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u$&#39;</span><span class="p">)</span>
+    <span class="c1"># Now we will clean up the files we created</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm params.dat&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm solution.npz&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$u$&#39;)
-</pre></div>
-</div>
-<img alt="../_images/b6cde9fa00bae65eccb80985d13d739c5ede82099593a50efb4bed51b165f4a8.png" src="../_images/b6cde9fa00bae65eccb80985d13d739c5ede82099593a50efb4bed51b165f4a8.png" />
+<img alt="../_images/36fb8764ce27c4d0fd173e9837aef6e4839ac6c680b7a98c546a76a2ef5b48c5.png" src="../_images/36fb8764ce27c4d0fd173e9837aef6e4839ac6c680b7a98c546a76a2ef5b48c5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -312,52 +328,78 @@ v0.1.0</span>
         <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">run_directory</span> <span class="o">+</span> <span class="s1">&#39;/params.dat&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">]))</span>
         
     <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parameter_sample</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">starting_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">run_directory</span><span class="p">)</span>
         <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;python &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">exec_dir_</span> <span class="o">+</span> <span class="s1">&#39;adr_1d.py&#39;</span><span class="p">)</span>
+        <span class="c1">#To avoid confusion, we will move back to the directory we started from</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">starting_dir</span><span class="p">)</span>
         <span class="k">return</span> <span class="mi">0</span>
-
-<span class="c1"># Let&#39;s instatiate the model and test it out. First, we will delete the &quot;solution.npz&quot; and &quot;params.dat&quot; files we created above:</span>
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm params.dat&#39;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm solution.npz&#39;</span><span class="p">)</span>
 
 <span class="c1">#Now let&#39;s try initializing the model</span>
 <span class="n">adr_for_romtools</span> <span class="o">=</span> <span class="n">adrExternalRomToolsModel</span><span class="p">()</span>
 
 <span class="c1">#That&#39;s it, we can use this in a sampling workflow. </span>
-
-<span class="c1">#Let&#39;s do an example run of the model similar to how it will be used in a workflow.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Let&#39;s do an example run of the model similar to how it will be used in a workflow.</span>
 
 <span class="c1">#First, let&#39;s make a dictionary that is a stand in for the parameter space</span>
-<span class="n">parameter_sample</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-1</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parameter_sample</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-1</span>
+    
+    <span class="c1">#Now, let&#39;s populate our run directory. In this example, we will just use the current run directory.</span>
+    <span class="c1">#In a full workflow, romtools will manage creating directories</span>
+    <span class="n">d</span>
 
-<span class="c1">#Now, let&#39;s populate our run directory. In this example, we will just use the current run directory.</span>
-<span class="c1">#In a full workflow, romtools will manage creating directories</span>
-<span class="n">adr_for_romtools</span><span class="o">.</span><span class="n">populate_run_directory</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="n">parameter_sample</span><span class="p">)</span>
+    <span class="c1">#Now, let&#39;s run the model</span>
+    <span class="n">adr_for_romtools</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="n">parameter_sample</span><span class="p">)</span>
 
-<span class="c1">#Now, let&#39;s run the model</span>
-<span class="n">adr_for_romtools</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="n">parameter_sample</span><span class="p">)</span>
+    <span class="c1">#We can look at a solution</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;solution.npz&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u$&#39;</span><span class="p">)</span>
 
-<span class="c1">#We can look at a solution</span>
-<span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;solution.npz&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">sol</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u$&#39;</span><span class="p">)</span>
+    <span class="c1">#We will finish by cleaning up the files we created</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm params.dat&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm solution.npz&#39;</span><span class="p">)</span>
 
-<span class="c1">#We will finish by cleaning up the files we created</span>
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm params.dat&#39;</span><span class="p">)</span>
-<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;rm solution.npz&#39;</span><span class="p">)</span>
-
-<span class="c1">#That&#39;s it! See the sampling tutorial for an example of how this model is used in a sampling workflow</span>
+    <span class="c1">#That&#39;s it! See the sampling tutorial for an example of how this model is used in a sampling workflow</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-1</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#Now, let&#39;s populate our run directory. In this example, we will just use the current run directory.</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="c1">#In a full workflow, romtools will manage creating directories</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">d</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="c1">#Now, let&#39;s run the model</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="n">adr_for_romtools</span><span class="o">.</span><span class="n">run_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span><span class="n">parameter_sample</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;d&#39; is not defined
 </pre></div>
 </div>
-<img alt="../_images/129e4f706f6c7cdec406a7b11077e10e23577a6c4b6a8dcc5a48d8a863038b58.png" src="../_images/129e4f706f6c7cdec406a7b11077e10e23577a6c4b6a8dcc5a48d8a863038b58.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eparish1/Research/rom-tools-and-workflows-demos/docs/source/notebooks
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -367,12 +409,12 @@ v0.1.0</span>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../workflows.html">
+          <a class="next-page" href="external_qoi_model.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">workflows</div>
+                <div class="title">External QoiModel tutorial</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>

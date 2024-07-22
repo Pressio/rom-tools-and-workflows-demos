@@ -172,7 +172,7 @@ v0.1.0</span>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Build/install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<p class="caption" role="heading"><span class="caption-text">Basic concept tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../vector_space.html">vector_space</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="dictionary_vector_space.html">Dictionary vector space tutorial</a></li>
@@ -185,13 +185,28 @@ v0.1.0</span>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Basic parameter space tutorial</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic workflow tutorials</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../models.html">models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_model.html">Basic model tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_model.html">External model tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_qoi_model.html">External QoiModel tutorial</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../workflows.html">workflows</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_sampling.html">Basic sampling tutorial</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROM-FOM workflow tutorials</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_builders.html">model_builders</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_builder.html">Basic model builder tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../greedy_training.html">Greedy Training</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="greedy_training.html">Greedy training tutorial</a></li>
 </ul>
 </li>
 </ul>
@@ -254,20 +269,28 @@ v0.1.0</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Now, we will design our parameter space class:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Now, we will design our parameter space class</span>
+<span class="sd">This parameter space is designed to work with the 1D advection diffusion reaction equation:</span>
+
+<span class="sd">c u_x - nu * u_xx = 1</span>
+
+<span class="sd">where u is the state, c, is the advection speed, and nu is the viscosity.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="c1">#We inherit the class from ParameterSpace, which gives the abstract base template </span>
 <span class="k">class</span> <span class="nc">BasicParameterSpace</span><span class="p">(</span><span class="n">ParameterSpace</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1">#We will have two variables, x and y</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span>
 
-        <span class="c1"># The dimension of the parameter space is 2 (x and y)</span>
+        <span class="c1"># The dimension of the parameter space is 2 (c and nu)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dim_</span> <span class="o">=</span> <span class="mi">2</span>
 
-        <span class="c1"># In this example we will consider uncorrelated variables w/ mean [1,2] and standard deviation [0.1,0.2]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">means_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stds_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span> 
+        <span class="c1"># In this example we will consider the two variables to be uncorrelated, and we will assign them uniform distributions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lower_bounds_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.e-3</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upper_bounds_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-1</span><span class="p">])</span>
         
     <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_names</span>
@@ -275,13 +298,14 @@ v0.1.0</span>
     <span class="k">def</span> <span class="nf">get_dimensionality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_</span>
 
-    <span class="k">def</span> <span class="nf">generate_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">means_</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">stds_</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">number_of_samples</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">generate_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_samples</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_bounds_</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">upper_bounds_</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">number_of_samples</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">samples</span>
 
 
 <span class="c1">#Now, let&#39;s instatiate the parameter space</span>
-<span class="n">myBasicParameterSpace</span> <span class="o">=</span> <span class="n">BasicParameterSpace</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">myBasicParameterSpace</span> <span class="o">=</span> <span class="n">BasicParameterSpace</span><span class="p">()</span>
 
 <span class="c1">#That&#39;s it! We now have a parameter space that can be used for, e.g., basic sampling</span>
 </pre></div>
@@ -313,17 +337,18 @@ v0.1.0</span>
         <span class="k">return</span> <span class="n">samples</span>
 
 <span class="c1">#Python will throw an error when we try to instatiate</span>
-<span class="n">myBadBasicParameterSpace</span> <span class="o">=</span> <span class="n">BadBasicParameterSpace</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">myBadBasicParameterSpace</span> <span class="o">=</span> <span class="n">BadBasicParameterSpace</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">24</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="k">return</span> <span class="n">samples</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
 <span class="g g-Whitespace">     </span><span class="mi">23</span> <span class="c1">#Python will throw an error when we try to instatiate</span>
-<span class="ne">---&gt; </span><span class="mi">24</span> <span class="n">myBadBasicParameterSpace</span> <span class="o">=</span> <span class="n">BadBasicParameterSpace</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">25</span>     <span class="n">myBadBasicParameterSpace</span> <span class="o">=</span> <span class="n">BadBasicParameterSpace</span><span class="p">()</span>
 
 <span class="ne">TypeError</span>: Can&#39;t instantiate abstract class BadBasicParameterSpace with abstract method get_names
 </pre></div>

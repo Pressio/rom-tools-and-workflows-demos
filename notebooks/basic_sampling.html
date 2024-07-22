@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="License" href="../license.html" /><link rel="prev" title="workflows" href="../workflows.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="model_builders" href="../model_builders.html" /><link rel="prev" title="workflows" href="../workflows.html" />
 
     <meta name="generator" content="sphinx-5.0.1, furo 2022.06.04.1"/>
         <title>Basic sampling tutorial - rom-tools-and-workflows-demos v0.1.0</title>
@@ -172,8 +172,8 @@ v0.1.0</span>
 <li class="toctree-l1"><a class="reference internal" href="../installation.html">Build/install</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../documentation.html">Documentation</a></li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul class="current">
+<p class="caption" role="heading"><span class="caption-text">Basic concept tutorials</span></p>
+<ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../vector_space.html">vector_space</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="dictionary_vector_space.html">Dictionary vector space tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pod_vector_space.html">POD vector space tutorial</a></li>
@@ -185,13 +185,28 @@ v0.1.0</span>
 <li class="toctree-l2"><a class="reference internal" href="parameter_space.html">Basic parameter space tutorial</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Basic workflow tutorials</span></p>
+<ul class="current">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../models.html">models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_model.html">Basic model tutorial</a></li>
 <li class="toctree-l2"><a class="reference internal" href="external_model.html">External model tutorial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external_qoi_model.html">External QoiModel tutorial</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../workflows.html">workflows</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Basic sampling tutorial</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">ROM-FOM workflow tutorials</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../model_builders.html">model_builders</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="model_builder.html">Basic model builder tutorial</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../greedy_training.html">Greedy Training</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="greedy_training.html">Greedy training tutorial</a></li>
 </ul>
 </li>
 </ul>
@@ -256,111 +271,68 @@ v0.1.0</span>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we are going to create a wrapper around a simple model for the 1D advection diffusion reaction equation</span>
-<span class="c1"># c u_x - nu * u_xx = 1</span>
-<span class="c1"># (see model tutorials )</span>
-<span class="k">class</span> <span class="nc">adrExternalRomToolsModel</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1"># Get path to adr code</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">exec_dir_</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/adr_1d/&#39;</span>
-        
-    <span class="k">def</span> <span class="nf">populate_run_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parameter_sample</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="c1"># Here, we need to make a params.dat file in the run_directory</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
-        <span class="n">nu</span> <span class="o">=</span> <span class="n">parameter_sample</span><span class="p">[</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">run_directory</span> <span class="o">+</span> <span class="s1">&#39;/params.dat&#39;</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span><span class="n">nu</span><span class="p">]))</span>
-        
-    <span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">run_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parameter_sample</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">run_directory</span><span class="p">)</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;python &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">exec_dir_</span> <span class="o">+</span> <span class="s1">&#39;adr_1d.py&#39;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="mi">0</span>
-
-<span class="n">myModel</span> <span class="o">=</span> <span class="n">adrExternalRomToolsModel</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Next, we are going to construct a parameter space. See the parameter_space tutorial for more details</span>
-<span class="c1"># Here, we will investigate the parameters c \in U[0.5,1.5], and \nu \in U[1e-3,1e-1]</span>
-<span class="k">class</span> <span class="nc">AdrParameterSpace</span><span class="p">(</span><span class="n">ParameterSpace</span><span class="p">):</span>
-
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="c1">#We will have two variables, c and nu</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">var_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;nu&#39;</span><span class="p">]</span>
-
-        <span class="c1"># The dimension of the parameter space is 2 (c and nu)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dim_</span> <span class="o">=</span> <span class="mi">2</span>
-
-        <span class="c1"># In this example we will consider uncorrelated variables w/ mean [1,2] and standard deviation [0.1,0.2]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lower_bounds_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.e-3</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">upper_bounds_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-1</span><span class="p">])</span>
-        
-    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">var_names</span>
-
-    <span class="k">def</span> <span class="nf">get_dimensionality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dim_</span>
-
-    <span class="k">def</span> <span class="nf">generate_samples</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_bounds_</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">upper_bounds_</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">number_of_samples</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">dim_</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">samples</span>
-
-<span class="n">myParameterSpace</span> <span class="o">=</span> <span class="n">AdrParameterSpace</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Now, we can run a sampling algorithm (https://pressio.github.io/rom-tools-and-workflows/romtools/workflows/sampling/sampling.html)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># As a starting point, we will use the model for the advection diffusion equation created in the external_model tutorial</span>
+    <span class="kn">from</span> <span class="nn">ipynb.fs.full.external_model</span> <span class="kn">import</span> <span class="n">adrExternalRomToolsModel</span>
+    <span class="n">myModel</span> <span class="o">=</span> <span class="n">adrExternalRomToolsModel</span><span class="p">()</span>
 
-<span class="c1">#The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.</span>
+    <span class="c1"># We will use the parameter space created in the parameter space tutorial</span>
+    <span class="kn">from</span> <span class="nn">ipynb.fs.full.parameter_space</span> <span class="kn">import</span> <span class="n">BasicParameterSpace</span>
+    <span class="n">myParameterSpace</span> <span class="o">=</span> <span class="n">BasicParameterSpace</span><span class="p">()</span>
 
-<span class="n">work_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/sampling_tutorial/&#39;</span>
-
-
-<span class="n">run_sampling</span><span class="p">(</span>
-	<span class="n">model</span> <span class="o">=</span> <span class="n">myModel</span><span class="p">,</span>
-	<span class="n">parameter_space</span> <span class="o">=</span> <span class="n">myParameterSpace</span><span class="p">,</span>
-	<span class="n">absolute_sampling_directory</span><span class="o">=</span><span class="n">work_directory</span><span class="p">,</span>
-    <span class="n">number_of_samples</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="c1">#The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.</span>
+    <span class="n">work_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/sampling_tutorial/&#39;</span>
+    
+    <span class="c1">#Now we can run the sampling algorithm.</span>
+    
+    <span class="n">sample_directories</span> <span class="o">=</span> <span class="n">sampling</span><span class="o">.</span><span class="n">run_sampling</span><span class="p">(</span>
+    	<span class="n">model</span> <span class="o">=</span> <span class="n">myModel</span><span class="p">,</span>
+    	<span class="n">parameter_space</span> <span class="o">=</span> <span class="n">myParameterSpace</span><span class="p">,</span>
+    	<span class="n">absolute_sampling_directory</span><span class="o">=</span><span class="n">work_directory</span><span class="p">,</span>
+        <span class="n">number_of_samples</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1">#The sample_directories returned by the algorithm contains all the directories that samples were run in:</span>
+<span class="c1"># work_directory/run_0</span>
+<span class="c1"># work_directory/run_1</span>
+<span class="c1"># ...</span>
+<span class="c1"># work_directory/run_4</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">line</span> <span class="mi">8</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Now, we can run a sampling algorithm (https://pressio.github.io/rom-tools-and-workflows/romtools/workflows/sampling/sampling.html)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1">#The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">work_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s1">&#39;/sampling_tutorial/&#39;</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">run_sampling</span><span class="p">(</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 	<span class="n">model</span> <span class="o">=</span> <span class="n">myModel</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 	<span class="n">parameter_space</span> <span class="o">=</span> <span class="n">myParameterSpace</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 	<span class="n">absolute_sampling_directory</span><span class="o">=</span><span class="n">work_directory</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="n">number_of_samples</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="c1"># As a starting point, we will use the model for the advection diffusion equation created in the external_model tutorial</span>
+<span class="ne">----&gt; </span><span class="mi">4</span>     <span class="kn">from</span> <span class="nn">ipynb.fs.full.external_model</span> <span class="kn">import</span> <span class="n">adrExternalRomToolsModel</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">myModel</span> <span class="o">=</span> <span class="n">adrExternalRomToolsModel</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="c1"># We will use the parameter space created in the parameter space tutorial</span>
 
-<span class="ne">NameError</span>: name &#39;run_sampling&#39; is not defined
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;ipynb&#39;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can check the dimension of the vector space</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The dimension of the vector space is &quot;</span> <span class="p">,</span> <span class="n">my_affine_vector_space</span><span class="o">.</span><span class="n">extents</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of basis vectors in my vector space is &quot;</span> <span class="p">,</span> <span class="n">my_affine_vector_space</span><span class="o">.</span><span class="n">extents</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Now we can look at the solutions</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">sample_dir</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sample_directories</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">sample_dir</span> <span class="o">+</span> <span class="s1">&#39;/solution.npz&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Run &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$x$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$u$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#That&#39;s it!</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The dimension of the vector space is  (3, 500, 30)
-The number of basis vectors in my vector space is  30
-</pre></div>
-</div>
+<img alt="../_images/bb1dc832cbd93349a00f075bcbd1eee282000eaf1e715c1f55e9131a7992b0f0.png" src="../_images/bb1dc832cbd93349a00f075bcbd1eee282000eaf1e715c1f55e9131a7992b0f0.png" />
 </div>
 </div>
 </section>
@@ -370,12 +342,12 @@ The number of basis vectors in my vector space is  30
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../license.html">
+          <a class="next-page" href="../model_builders.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">License</div>
+                <div class="title">model_builders</div>
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>

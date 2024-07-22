@@ -38,16 +38,17 @@ class BadBasicParameterSpace(ParameterSpace):
         return samples
 
 #Python will throw an error when we try to instatiate
-myBadBasicParameterSpace = BadBasicParameterSpace()
+if __name__ == "__main__":
+    myBadBasicParameterSpace = BadBasicParameterSpace()
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mTypeError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[3], line 24[0m
-[1;32m     21[0m         [38;5;28;01mreturn[39;00m samples
+Cell [0;32mIn[3], line 25[0m
 [1;32m     23[0m [38;5;66;03m#Python will throw an error when we try to instatiate[39;00m
-[0;32m---> 24[0m myBadBasicParameterSpace [38;5;241m=[39m [43mBadBasicParameterSpace[49m[43m([49m[43m)[49m
+[1;32m     24[0m [38;5;28;01mif[39;00m [38;5;18m__name__[39m [38;5;241m==[39m [38;5;124m"[39m[38;5;124m__main__[39m[38;5;124m"[39m:
+[0;32m---> 25[0m     myBadBasicParameterSpace [38;5;241m=[39m [43mBadBasicParameterSpace[49m[43m([49m[43m)[49m
 
 [0;31mTypeError[0m: Can't instantiate abstract class BadBasicParameterSpace with abstract method get_names
 

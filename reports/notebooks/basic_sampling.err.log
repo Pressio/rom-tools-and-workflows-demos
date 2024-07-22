@@ -16,32 +16,42 @@ Traceback (most recent call last):
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
 #Now, we can run a sampling algorithm (https://pressio.github.io/rom-tools-and-workflows/romtools/workflows/sampling/sampling.html)
+if __name__ == "__main__":
+    # As a starting point, we will use the model for the advection diffusion equation created in the external_model tutorial
+    from ipynb.fs.full.external_model import adrExternalRomToolsModel
+    myModel = adrExternalRomToolsModel()
 
-#The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.
+    # We will use the parameter space created in the parameter space tutorial
+    from ipynb.fs.full.parameter_space import BasicParameterSpace
+    myParameterSpace = BasicParameterSpace()
 
-work_directory = os.getcwd() + '/sampling_tutorial/'
-
-
-run_sampling(
-	model = myModel,
-	parameter_space = myParameterSpace,
-	absolute_sampling_directory=work_directory,
-    number_of_samples = 5)
+    #The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.
+    work_directory = os.getcwd() + '/sampling_tutorial/'
+    
+    #Now we can run the sampling algorithm.
+    
+    sample_directories = sampling.run_sampling(
+    	model = myModel,
+    	parameter_space = myParameterSpace,
+    	absolute_sampling_directory=work_directory,
+        number_of_samples = 5)
+#The sample_directories returned by the algorithm contains all the directories that samples were run in:
+# work_directory/run_0
+# work_directory/run_1
+# ...
+# work_directory/run_4
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[4], line 8[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[2], line 4[0m
 [1;32m      1[0m [38;5;66;03m#Now, we can run a sampling algorithm (https://pressio.github.io/rom-tools-and-workflows/romtools/workflows/sampling/sampling.html)[39;00m
-[1;32m      2[0m 
-[1;32m      3[0m [38;5;66;03m#The sampling algorithm requires a directory argument of where to put all the generated samples, files, etc.[39;00m
-[1;32m      5[0m work_directory [38;5;241m=[39m os[38;5;241m.[39mgetcwd() [38;5;241m+[39m [38;5;124m'[39m[38;5;124m/sampling_tutorial/[39m[38;5;124m'[39m
-[0;32m----> 8[0m [43mrun_sampling[49m(
-[1;32m      9[0m 	model [38;5;241m=[39m myModel,
-[1;32m     10[0m 	parameter_space [38;5;241m=[39m myParameterSpace,
-[1;32m     11[0m 	absolute_sampling_directory[38;5;241m=[39mwork_directory,
-[1;32m     12[0m     number_of_samples [38;5;241m=[39m [38;5;241m5[39m)
+[1;32m      2[0m [38;5;28;01mif[39;00m [38;5;18m__name__[39m [38;5;241m==[39m [38;5;124m"[39m[38;5;124m__main__[39m[38;5;124m"[39m:
+[1;32m      3[0m     [38;5;66;03m# As a starting point, we will use the model for the advection diffusion equation created in the external_model tutorial[39;00m
+[0;32m----> 4[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mipynb[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfs[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfull[39;00m[38;5;21;01m.[39;00m[38;5;21;01mexternal_model[39;00m [38;5;28;01mimport[39;00m adrExternalRomToolsModel
+[1;32m      5[0m     myModel [38;5;241m=[39m adrExternalRomToolsModel()
+[1;32m      7[0m     [38;5;66;03m# We will use the parameter space created in the parameter space tutorial[39;00m
 
-[0;31mNameError[0m: name 'run_sampling' is not defined
+[0;31mModuleNotFoundError[0m: No module named 'ipynb'
 

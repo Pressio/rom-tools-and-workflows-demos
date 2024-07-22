@@ -18,6 +18,9 @@
 # General configuration
 # ---------------------
 
+# Certificate verification
+tls_verify = False
+
 # Add any Sphinx extension module names here, as strings. They can be extensions
 # coming with Sphinx (named "sphinx.ext.*") or your custom ones.
 extensions = [
@@ -25,11 +28,17 @@ extensions = [
   "sphinx.ext.viewcode",
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
-  "sphinx_design"
+  "sphinx_design",
   "myst_nb",
   "jupyter_sphinx",
-  "nbsphinx",
 ]
+
+nbsphinx_custom_formats = {
+    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+}
+
+# Adjusting size of embedded HTMLs
+html_static_path = ['_static']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -203,3 +212,12 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_use_modindex = True
+
+
+import os
+
+package_path = os.path.abspath('../..')
+os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
+
+def setup(app):
+    app.add_css_file('custom.css')

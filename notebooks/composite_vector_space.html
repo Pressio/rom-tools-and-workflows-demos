@@ -186,7 +186,7 @@ v0.1.0</span>
 </ul>
 </li>
 </ul>
-<p class="caption" role="heading"><span class="caption-text">Basic workflow tutorials</span></p>
+<p class="caption" role="heading"><span class="caption-text">Single model workflow tutorials</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../models.html">models</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_model.html">Basic model tutorial</a></li>
@@ -194,7 +194,7 @@ v0.1.0</span>
 <li class="toctree-l2"><a class="reference internal" href="external_qoi_model.html">External QoiModel tutorial</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../workflows.html">workflows</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../workflows.html">Single model workflows</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="basic_sampling.html">Basic sampling tutorial</a></li>
 </ul>
 </li>
@@ -250,9 +250,11 @@ v0.1.0</span>
         <article role="main">
           <section id="composite-vector-space-tutorial">
 <h1>Composite vector space tutorial<a class="headerlink" href="#composite-vector-space-tutorial" title="Permalink to this heading">#</a></h1>
-<p>In this tutorial you will learn:</p>
+<p>In romtools, a composite vector space refers to multiple vector spaces that are stichted together into one vector space.
+The use case of a composite vector space is if you want to have independent basis functions for different DOFs (e.g., mass, momentum)
+In this tutorial you will learn:</p>
 <ul class="simple">
-<li><p>How to composite vector space that is several vector spaces stiched together</p></li>
+<li><p>How to construct a composite vector space that comprises several vector spaces stiched together</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -408,7 +410,7 @@ The vector space for rhoE is of shape:  (1, 500, 6)
             
             <a href="https://github.com/pradyunsg/furo">Furo</a>
             <div class="last-updated">
-              Last updated on Jul 22, 2024</div>
+              Last updated on Jul 23, 2024</div>
           </div>
           <div class="right-details">
             <div class="icons">

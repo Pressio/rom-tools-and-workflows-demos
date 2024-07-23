@@ -40,13 +40,17 @@ This site provides a suite of tutorials and demos on how to the rom-tools-and-wo
     parameter_space 
 
 .. toctree::
-    :caption: Basic workflow tutorials 
+    :caption: Single model workflow tutorials 
+    :maxdepth: 1
+    :hidden:
 
     models 
     workflows 
 
 .. toctree::
     :caption: ROM-FOM workflow tutorials 
+    :maxdepth: 1
+    :hidden:
 
     model_builders 
     greedy_training

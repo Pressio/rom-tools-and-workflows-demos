@@ -7,8 +7,11 @@
    "source": [
     "# Composite vector space tutorial\n",
     "\n",
+    "In romtools, a composite vector space refers to multiple vector spaces that are stichted together into one vector space. \n",
+    "The use case of a composite vector space is if you want to have independent basis functions for different DOFs (e.g., mass, momentum)\n",
     "In this tutorial you will learn:\n",
-    "- How to composite vector space that is several vector spaces stiched together"
+    "- How to construct a composite vector space that comprises several vector spaces stiched together\n",
+    "\n"
    ]
   },
   {

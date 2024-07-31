@@ -31,11 +31,10 @@ extensions = [
   "sphinx_design",
   "nbsphinx",
   "jupyter_sphinx"
+  "myst_nb",
+  "jupyter_sphinx",
 ]
 
-# nb_custom_formats = {
-#     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
-# }
 nbsphinx_custom_formats = {
     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
 }
@@ -216,10 +215,18 @@ latex_documents = [
 # If false, no module index is generated.
 #latex_use_modindex = True
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 import os
 
 package_path = os.path.abspath('../..')
 os.environ['PYTHONPATH'] = ':'.join((package_path, os.environ.get('PYTHONPATH', '')))
 
 def setup(app):
+<<<<<<< HEAD
     app.add_css_file('custom.css')
+=======
+    app.add_css_file('custom.css')
+>>>>>>> origin/main

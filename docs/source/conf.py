@@ -31,9 +31,21 @@ extensions = [
   "sphinx_design",
   "nbsphinx",
   "jupyter_sphinx",
-  "myst_nb",
-  "jupyter_sphinx",
+  'sphinx.ext.todo',
+  'sphinx.ext.mathjax',
+  'sphinx.ext.ifconfig',
+  'sphinx.ext.napoleon',
+  # 'myst_nb',
 ]
+
+# MathJax (for rendering Jupyter math)
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+mathjax_config = {
+    'tex2jax': {
+        'inlineMath': [['$', '$'], ['\\(', '\\)']],
+        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
+    }
+}
 
 # nbsphinx_custom_formats = {
 #     ".md": ["jupytext.reads", {"fmt": "mystnb"}],

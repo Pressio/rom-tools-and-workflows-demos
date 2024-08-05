@@ -29,13 +29,27 @@ extensions = [
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
   "sphinx_design",
-  "myst_nb",
+  "nbsphinx",
   "jupyter_sphinx",
+  'sphinx.ext.todo',
+  'sphinx.ext.mathjax',
+  'sphinx.ext.ifconfig',
+  'sphinx.ext.napoleon',
+  # 'myst_nb',
 ]
 
-nbsphinx_custom_formats = {
-    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+# MathJax (for rendering Jupyter math)
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+mathjax_config = {
+    'tex2jax': {
+        'inlineMath': [['$', '$'], ['\\(', '\\)']],
+        'displayMath': [['$$', '$$'], ['\\[', '\\]']],
+    }
 }
+
+# nbsphinx_custom_formats = {
+#     ".md": ["jupytext.reads", {"fmt": "mystnb"}],
+# }
 
 # Adjusting size of embedded HTMLs
 html_static_path = ['_static']
@@ -111,21 +125,21 @@ pygments_dark_style = "monokai"
 # Options for HTML output
 # -----------------------
 
-html_theme = "furo"
+# html_theme = "furo"
 
-html_theme_options = {
-  "sidebar_hide_name": False,
-  "light_css_variables": {
-    "color-brand-primary": "#336790",  # blue
-    "color-brand-content": "#336790"
-  },
-  "dark_css_variables": {
-    #"color-brand-primary": "#E5B62F"  # yellow
-    #"color-brand-content": "#E5B62F",
-    "color-brand-primary": "#F39C12",  # orange
-    "color-brand-content": "#F39C12",
-  },
-}
+# html_theme_options = {
+#   "sidebar_hide_name": False,
+#   "light_css_variables": {
+#     "color-brand-primary": "#336790",  # blue
+#     "color-brand-content": "#336790"
+#   },
+#   "dark_css_variables": {
+#     #"color-brand-primary": "#E5B62F"  # yellow
+#     #"color-brand-content": "#E5B62F",
+#     "color-brand-primary": "#F39C12",  # orange
+#     "color-brand-content": "#F39C12",
+#   },
+# }
 
 
 html_sidebars = {}
@@ -212,7 +226,6 @@ latex_documents = [
 
 # If false, no module index is generated.
 #latex_use_modindex = True
-
 
 import os
 

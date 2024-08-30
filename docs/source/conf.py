@@ -29,13 +29,13 @@ extensions = [
   "sphinx.ext.intersphinx",
   "sphinx_copybutton",
   "sphinx_design",
-  "myst_nb",
+  "nbsphinx",
   "jupyter_sphinx",
+  'sphinx.ext.todo',
+  'sphinx.ext.mathjax',
+  'sphinx.ext.ifconfig',
+  'sphinx.ext.napoleon',
 ]
-
-nbsphinx_custom_formats = {
-    ".md": ["jupytext.reads", {"fmt": "mystnb"}],
-}
 
 # Adjusting size of embedded HTMLs
 html_static_path = ['_static']

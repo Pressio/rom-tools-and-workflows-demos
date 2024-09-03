@@ -29,7 +29,7 @@ jobs:
       - name: Install Pressio Demo Apps
         run: |
           pip install build pytest numpy scipy matplotlib
-          git clone --recursive git@github.com:Pressio/pressio-demoapps.git
+          git clone --recursive https://github.com/Pressio/pressio-demoapps.git
           cd pressio-demoapps
           python cmake_build.py
           pip install .

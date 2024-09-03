@@ -2,7 +2,7 @@ name: Deploy docs
 
 on:
   push:
-    branches: [ 3-add-pressio-demo-apps-to-github-workflow ]
+    branches: [ main ]
 
 jobs:
   build-and-deploy-docs:
@@ -34,22 +34,22 @@ jobs:
           python cmake_build.py
           pip install .
 
-      # - name: Build documentation
-      #   working-directory: ${{ env.docs-directory }}
-      #   run: |
-      #     make html
+      - name: Build documentation
+        working-directory: ${{ env.docs-directory }}
+        run: |
+          make html
 
-      # # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
-      # # and there is no need to generate anything
-      # - name: Generate nojekyll file
-      #   working-directory: ${{ env.docs-directory }}/generated_docs
-      #   run: touch .nojekyll
+      # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
+      # and there is no need to generate anything
+      - name: Generate nojekyll file
+        working-directory: ${{ env.docs-directory }}/generated_docs
+        run: touch .nojekyll
 
-      # # This action moves the content of `generated_docs` to the branch from where
-      # # the site is published
-      # - name: Deploy docs
-      #   uses: JamesIves/github-pages-deploy-action@v4
-      #   with:
-      #     branch: website-deployment
-      #     folder: ${{ env.docs-directory }}/generated_docs
-      #     clean: true
+      # This action moves the content of `generated_docs` to the branch from where
+      # the site is published
+      - name: Deploy docs
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: website-deployment
+          folder: ${{ env.docs-directory }}/generated_docs
+          clean: true

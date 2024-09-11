@@ -15,7 +15,7 @@ class adrRom:
         self.x_ = np.linspace(0,1,nx)
 
     def assemble_system(self,c,nu):
-        self.A_r_ = c*self.Ac_r_ - nu*self.Ad_r_
+        self.A_r_ = c*self.Ac_r_ - nu*self.Ad_r_ 
 
     def solve(self,c,nu):
         self.assemble_system(c,nu)

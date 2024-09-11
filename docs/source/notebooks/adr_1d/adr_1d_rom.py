@@ -16,8 +16,6 @@ class adrRom:
 
     def assemble_system(self,c,nu):
         self.A_r_ = c*self.Ac_r_ - nu*self.Ad_r_ 
-        # Add small number to diagonal to avoid conditioning issues
-        #self.A_r_ += 1.e-15*np.eye(self.A_r_.shape[0])
 
     def solve(self,c,nu):
         self.assemble_system(c,nu)

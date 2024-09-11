@@ -15,7 +15,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 11,
+   "execution_count": 5,
    "id": "358fb709-9c81-45a3-a871-2549de121580",
    "metadata": {},
    "outputs": [],
@@ -30,7 +30,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 6,
    "id": "b1ffa4be-246c-44a9-b486-f517b9f7acb9",
    "metadata": {},
    "outputs": [],
@@ -41,7 +41,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 9,
+   "execution_count": 11,
    "id": "217759fb-6ec9-4488-897b-e5b4db9f4b2c",
    "metadata": {},
    "outputs": [],
@@ -59,15 +59,12 @@
     "        ux_at_right_edge = (0. - u[-1])/dx\n",
     "        return ux_at_right_edge\n",
     "\n",
-    "# We can now instatiate our QoI\n",
-    "myModel = adrExternalRomToolsQoiModel()\n",
-    "\n",
     "#That's it!"
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": 15,
+   "execution_count": 12,
    "id": "dbf42fd4-340f-4074-9682-69a9df424b26",
    "metadata": {},
    "outputs": [
@@ -75,7 +72,19 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "The QoI is -6.429918802201725\n"
+      "[1.28125738e-14 5.94704074e-02 1.18467441e-01 1.76917136e-01\n",
+      " 2.34733971e-01 2.91819061e-01 3.48058072e-01 4.03318803e-01\n",
+      " 4.57448398e-01 5.10270118e-01 5.61579606e-01 6.11140577e-01\n",
+      " 6.58679825e-01 7.03881455e-01 7.46380215e-01 7.85753780e-01\n",
+      " 8.21513841e-01 8.53095786e-01 8.79846785e-01 9.01012003e-01\n",
+      " 9.15718660e-01 9.22957608e-01 9.21562017e-01 9.10182740e-01\n",
+      " 8.87259825e-01 8.50989580e-01 7.99286485e-01 7.29739155e-01\n",
+      " 6.39559430e-01 5.25523499e-01 3.83903828e-01 2.10390458e-01\n",
+      " 0.00000000e+00] [0.      0.03125 0.0625  0.09375 0.125   0.15625 0.1875  0.21875 0.25\n",
+      " 0.28125 0.3125  0.34375 0.375   0.40625 0.4375  0.46875 0.5     0.53125\n",
+      " 0.5625  0.59375 0.625   0.65625 0.6875  0.71875 0.75    0.78125 0.8125\n",
+      " 0.84375 0.875   0.90625 0.9375  0.96875 1.     ]\n",
+      "The QoI is -6.7324946711637725\n"
      ]
     }
    ],
@@ -83,6 +92,9 @@
     "#Let's do an example run of the model similar to how it will be used in a workflow.\n",
     "\n",
     "if __name__==\"__main__\":\n",
+    "    # Instantiate our model\n",
+    "    myModel = adrExternalRomToolsQoiModel()\n",
+    "\n",
     "    #First, let's make a dictionary that is a stand in for the parameter space\n",
     "    parameter_sample = {}\n",
     "    parameter_sample['c'] = 0.5\n",
@@ -104,6 +116,14 @@
     "    os.system('rm params.dat')\n",
     "    os.system('rm solution.npz')"
    ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "80fce597-9ea5-40dc-a500-703ae98d6acf",
+   "metadata": {},
+   "outputs": [],
+   "source": []
   }
  ],
  "metadata": {
@@ -122,7 +142,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.12.4"
+   "version": "3.9.7"
   }
  },
  "nbformat": 4,

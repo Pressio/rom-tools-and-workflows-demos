@@ -38,12 +38,12 @@ Cell [0;32mIn[2], line 2[0m
 [1;32m      4[0m [38;5;66;03m## The snapshots are in tensor form:[39;00m
 [1;32m      5[0m n_vars, nx, nt [38;5;241m=[39m snapshots[38;5;241m.[39mshape
 
-File [0;32m/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py:455[0m, in [0;36mload[0;34m(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)[0m
-[1;32m    453[0m     own_fid [38;5;241m=[39m [38;5;28;01mFalse[39;00m
-[1;32m    454[0m [38;5;28;01melse[39;00m:
-[0;32m--> 455[0m     fid [38;5;241m=[39m stack[38;5;241m.[39menter_context([38;5;28;43mopen[39;49m[43m([49m[43mos[49m[38;5;241;43m.[39;49m[43mfspath[49m[43m([49m[43mfile[49m[43m)[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m"[39;49m[43m)[49m)
-[1;32m    456[0m     own_fid [38;5;241m=[39m [38;5;28;01mTrue[39;00m
-[1;32m    458[0m [38;5;66;03m# Code to distinguish from NumPy binary files and pickles.[39;00m
+File [0;32m/opt/hostedtoolcache/Python/3.10.14/x64/lib/python3.10/site-packages/numpy/lib/_npyio_impl.py:459[0m, in [0;36mload[0;34m(file, mmap_mode, allow_pickle, fix_imports, encoding, max_header_size)[0m
+[1;32m    457[0m     own_fid [38;5;241m=[39m [38;5;28;01mFalse[39;00m
+[1;32m    458[0m [38;5;28;01melse[39;00m:
+[0;32m--> 459[0m     fid [38;5;241m=[39m stack[38;5;241m.[39menter_context([38;5;28;43mopen[39;49m[43m([49m[43mos[49m[38;5;241;43m.[39;49m[43mfspath[49m[43m([49m[43mfile[49m[43m)[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m"[39;49m[43m)[49m)
+[1;32m    460[0m     own_fid [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[1;32m    462[0m [38;5;66;03m# Code to distinguish from NumPy binary files and pickles.[39;00m
 
 [0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'snapshots.npz'
 

@@ -13,25 +13,38 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python ${{ env.python-version }}
         uses: actions/setup-python@v4
         with:
           python-version: ${{ env.python-version }}
           architecture: 'x64'
+
       - name: Install Python dependencies
         run: |
           pip install -r ./docs/build_requirements.txt
           git clone https://github.com/Pressio/rom-tools-and-workflows.git
           pip install -e rom-tools-and-workflows
+
+      - name: Install Pressio Demo Apps
+        run: |
+          pip install build pytest numpy scipy matplotlib
+          git clone --recursive https://github.com/Pressio/pressio-demoapps.git
+          cd pressio-demoapps
+          python cmake_build.py
+          pip install .
+
       - name: Build documentation
         working-directory: ${{ env.docs-directory }}
         run: |
           make html
+
       # .nojekyll file is needed for GitHub Pages to know it's getting a ready webpage
       # and there is no need to generate anything
       - name: Generate nojekyll file
         working-directory: ${{ env.docs-directory }}/generated_docs
         run: touch .nojekyll
+
       # This action moves the content of `generated_docs` to the branch from where
       # the site is published
       - name: Deploy docs
